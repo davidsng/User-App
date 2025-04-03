@@ -11,6 +11,7 @@ import {
 } from "./pineconeVectorStore.js";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { generateRandomCRMUpdate } from "./generateRandomCRMUpdate.js";
+import { customerObjectSchema } from "./schemas/customerObjectSchema.js";
 
 // Load environment variables
 dotenv.config();
@@ -45,11 +46,13 @@ async function main() {
 
     // 3) Extract structured data from unstructured text
     try {
-      const unstructuredText = await generateRandomCRMUpdate();
-      console.log(
-        "Calling OpenAI to extract data from text:",
-        unstructuredText
-      );
+      const unstructuredText =
+        "Met Lauren from Shopback and negotiating a new deal for $35K for Radar product";
+      //     const unstructuredText = await generateRandomCRMUpdate();
+      //   console.log(
+      //     "Calling OpenAI to extract data from text:",
+      //     unstructuredText
+      //   );
 
       // 4) GPT system prompt
       const systemPrompt =
@@ -68,55 +71,6 @@ async function main() {
         "closed_lost"
       ];
 
-      const functionSchema = {
-        name: "customer_update",
-        description: "Extract customer info from unstructured GTM text.",
-        parameters: {
-          type: "object",
-          properties: {
-            company_name: {
-              type: "string",
-              description: "The name of the company mentioned"
-            },
-            contact: {
-              type: "object",
-              properties: {
-                name: { type: "string", description: "Contact's name" },
-                email: {
-                  type: "string",
-                  description: "Contact's email if available"
-                }
-              },
-              required: ["name"]
-            },
-            deal: {
-              type: "object",
-              properties: {
-                value: {
-                  type: "number",
-                  description: "The monetary value of the deal in USD"
-                },
-                product: {
-                  type: "string",
-                  description: "The product or service being sold"
-                },
-                stage: {
-                  type: "string",
-                  description:
-                    "The stage of the deal (e.g., lead, opportunity, closed_won, closed_lost)"
-                }
-              },
-              required: ["value"]
-            },
-            raw_input: {
-              type: "string",
-              description: "The original input text"
-            }
-          },
-          required: ["company_name", "contact", "raw_input"]
-        }
-      };
-
       let extractedData;
       try {
         const response = await openai.chat.completions.create({
@@ -125,7 +79,7 @@ async function main() {
             { role: "system", content: systemPrompt },
             { role: "user", content: unstructuredText }
           ],
-          functions: [functionSchema],
+          functions: [customerObjectSchema],
           function_call: { name: "customer_update" }
         });
 

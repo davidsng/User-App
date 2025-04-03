@@ -41,12 +41,6 @@ Run the main application:
 node main.js
 ```
 
-Generate a random CRM update:
-
-```
-node generateRandomCRMUpdate.js
-```
-
 ## Project Structure
 
 - `main.js` - Main application logic
