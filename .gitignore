@@ -1,8 +1,12 @@
 # Dependencies
 node_modules/
+archive/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
+
+# Test files
+tests/
 
 # Environment variables
 .env

@@ -33,6 +33,3 @@ export async function generateRandomCRMUpdate() {
   const crmUpdate = data.choices[0].message.content.trim();
   return crmUpdate;
 }
-
-// Example usage:
-generateRandomCRMUpdate().then(console.log).catch(console.error);

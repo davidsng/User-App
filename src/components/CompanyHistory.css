@@ -1,0 +1,441 @@
+.company-history {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, sans-serif;
+}
+
+.company-history h1 {
+  margin-bottom: 30px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+/* Summary cards */
+.history-summary {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.summary-card {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.value {
+  color: #212529;
+  font-weight: 400;
+}
+
+/* Timeline */
+.timeline {
+  margin-top: 40px;
+}
+
+.timeline-day {
+  margin-bottom: 30px;
+}
+
+.timeline-date {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.timeline-entries {
+  padding-left: 20px;
+  border-left: 2px solid #dee2e6;
+}
+
+.timeline-entry {
+  position: relative;
+  margin-bottom: 25px;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-entry:before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #dee2e6;
+  left: -29px;
+  top: 20px;
+}
+
+.timeline-entry.major-change {
+  background-color: #f8f5ff;
+  border-left: 3px solid #6f42c1;
+}
+
+.timeline-entry.major-change:before {
+  background-color: #6f42c1;
+}
+
+.entry-time {
+  color: #6c757d;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.entry-badge {
+  margin-bottom: 12px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.badge.company_classification,
+.badge.company_metrics {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge.contact_info,
+.badge.contact_role {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.badge.deal_stage,
+.badge.deal_value {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.badge.major {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.entry-summary {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.entry-details {
+  background-color: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+.entry-details h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #343a40;
+}
+
+.changes-table {
+  font-size: 14px;
+}
+
+.change-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #dee2e6;
+}
+
+.change-row:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.field-name {
+  width: 25%;
+  color: #495057;
+  font-weight: 500;
+}
+
+.previous-value {
+  width: 30%;
+  text-decoration: line-through;
+  color: #dc3545;
+  padding-right: 10px;
+}
+
+.arrow {
+  width: 5%;
+  text-align: center;
+  color: #6c757d;
+}
+
+.current-value {
+  width: 30%;
+  color: #28a745;
+}
+
+.no-history {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-style: italic;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.error {
+  color: #dc3545;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .history-summary {
+    flex-direction: column;
+  }
+
+  .changes-table {
+    font-size: 12px;
+  }
+
+  .field-name {
+    width: 20%;
+  }
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  display: flex;
+  margin: 30px 0 20px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6c757d;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.tab-button:hover {
+  color: #495057;
+}
+
+.tab-button.active {
+  color: #2c3e50;
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #6f42c1;
+}
+
+/* Deal Timeline */
+.deals-timeline {
+  margin-top: 20px;
+}
+
+.deal-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.deal-title {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deal-stage {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.deal-stage.opportunity {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.deal-stage.negotiation {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.deal-stage.closed-won {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.deal-stage.closed-lost {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.deal-amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 15px;
+}
+
+.deal-dates {
+  margin-bottom: 20px;
+}
+
+.date-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.date-row.expected {
+  border-left: 3px solid #6f42c1;
+}
+
+.date-row.actual {
+  border-left: 3px solid #28a745;
+  background-color: #f0fff4;
+}
+
+.date-label {
+  font-weight: 500;
+  color: #495057;
+  width: 150px;
+}
+
+.date-value {
+  color: #212529;
+}
+
+.signed-badge {
+  margin-left: auto;
+  background-color: #28a745;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Timeline visualizer */
+.signing-timeline {
+  margin-top: 20px;
+}
+
+.timeline-track {
+  height: 6px;
+  background-color: #e9ecef;
+  border-radius: 3px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.timeline-progress {
+  position: absolute;
+  height: 6px;
+  background-color: #28a745;
+  border-radius: 3px;
+  top: 0;
+  left: 0;
+}
+
+.timeline-marker {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  top: -5px;
+  transform: translateX(-50%);
+  background-color: #6f42c1;
+}
+
+.timeline-marker.completed {
+  background-color: #28a745;
+}
+
+.timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Badge for DEAL_TIMELINE category */
+.badge.deal_timeline {
+  background-color: #e6f7ff;
+  color: #0366d6;
+}

@@ -1,5 +1,3 @@
-const product_array = ["payments", "subscriptions", "other"];
-
 const deal_stage_array = [
   "lead",
   "opportunity",
@@ -8,4 +6,4 @@ const deal_stage_array = [
   "closed lost"
 ];
 
-export { product_array, deal_stage_array };
+export { deal_stage_array };

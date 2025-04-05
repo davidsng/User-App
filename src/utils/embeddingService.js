@@ -7,10 +7,6 @@ export const openai = new OpenAI({
 // Creates an embedding using OpenAI's text-embedding-ada-002
 export async function embedText(text) {
   try {
-    console.log(
-      `Calling OpenAI embeddings API with text of length: ${text.length}`
-    );
-
     // Ensure text is not empty
     if (!text || text.trim().length === 0) {
       console.error("Warning: Empty text provided to embedText function");
@@ -32,9 +28,6 @@ export async function embedText(text) {
     }
 
     const embedding = response.data[0].embedding;
-    console.log(
-      `Embedding generated successfully. Dimension: ${embedding.length}`
-    );
 
     // Validate embedding is an array of numbers
     if (
@@ -49,7 +42,6 @@ export async function embedText(text) {
     return embedding;
   } catch (error) {
     console.error("Error generating embedding:", error);
-    console.error("Error details:", error.error || error.message);
     if (error.response) {
       console.error("Response status:", error.response.status);
       console.error("Response data:", error.response.data);
