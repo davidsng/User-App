@@ -1,12 +1,12 @@
 import OpenAI from "openai";
 import dotenv from "dotenv";
-import { pgClient, initDB } from "./db/db.js";
+import { initDB } from "./db/index.js";
 import {
   processCustomerUpdate,
   getCustomerHistoryByCompanyId,
   getCompanyById,
   getEntityHistoryForVectorSearch
-} from "./db/postgresqlLogic.js";
+} from "./db/index.js";
 import { openai } from "./utils/embeddingService.js";
 import {
   initPineconeVectorStore,
@@ -17,6 +17,7 @@ import {
 import { Pinecone } from "@pinecone-database/pinecone";
 import { customerObjectSchema } from "./schemas/customerObjectSchema.js";
 import { runMigrations } from "./db/migrateDatabases.js";
+import { fileURLToPath } from "url";
 
 // Load environment variables
 dotenv.config();
@@ -37,7 +38,7 @@ async function main() {
       // Only run migrations if explicitly requested
       if (shouldRunMigrations) {
         console.log("Running database migrations...");
-        await runMigrations(pgClient);
+        await runMigrations();
         console.log("Migrations completed");
       }
     } catch (dbError) {
@@ -56,7 +57,7 @@ async function main() {
     // 3) Extract structured data from unstructured text
     try {
       const unstructuredText =
-        "Spoke to Daniel from Spotify. US$90K deal for payments product. Spotify.com. Close by June 20. Matthew is the AE on this deal. ";
+        "Spoke to Claire from OpenAI. US$1M deal for Connect product. Close by end of Q3. David is the AE on this deal. ";
 
       // Log the unstructured input (requirement #1)
       console.log("Unstructured input received:", unstructuredText);
@@ -189,15 +190,11 @@ async function main() {
       }
 
       // 6) Store the extracted data in PostgreSQL
-      const result = await processCustomerUpdate(
-        processedData,
-        {
-          source: "OpenAI extraction",
-          userId: "system",
-          userName: "Automated Process"
-        },
-        pgClient
-      );
+      const result = await processCustomerUpdate(processedData, {
+        source: "OpenAI extraction",
+        userId: "system",
+        userName: "Automated Process"
+      });
       const { companyId, contactIds, dealId } = result;
 
       // Get history data for vector search
@@ -358,16 +355,12 @@ NOTES: ${extractedData.raw_input}`;
       }
     } catch (error) {
       console.error("Error processing data:", error);
-    } finally {
-      try {
-        await pgClient.end();
-      } catch (e) {
-        console.error("Error closing database connection:", e);
-      }
     }
   } catch (error) {
-    console.error("Application error:", error);
+    console.error("Error in main:", error);
   }
 }
 
-main();
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch(console.error);
+}
