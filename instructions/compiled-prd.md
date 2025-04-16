@@ -19,7 +19,7 @@ Provide a unified platform that eliminates the need to buy and integrate 10-20 d
 - Agent architecture framework: Langgraph (and Langchain)
 - Vector store: Pinecone
 - Vector embeddings: OpenAI
-- Structured Output: OpenAI and/or Truecall
+- Structured Output: OpenAI and/or TrustCall
 - Structured database: Supabase
 - Auth: Supabase
 - Cache: Redis
@@ -214,7 +214,7 @@ This interface design brings together our architecture components in a cohesive 
 
 ## Major components of our software to build
 
-### 1. Master Planning Agent
+### 1. Supervisor Agent
 
 - **Primary Functions**
   - Takes input and coordinates with specialized sub-agents
@@ -250,7 +250,7 @@ This interface design brings together our architecture components in a cohesive 
 
 - **Specialized Agent Functions**
   - update_instructions agent
-  - customer_profile_agent
+  - crm_agent
   - email_agent
   - content_creation_agent
   - create_pipeline agent
@@ -290,7 +290,7 @@ This interface design brings together our architecture components in a cohesive 
   - Synthesizes feedback from completed activities
   - Routes feedback to appropriate system components
   - Improves user communication patterns
-  - Enhances master planner's task routing capabilities
+  - Enhances supervisor agent's task routing capabilities
 
 ### 6. Data Storage
 
@@ -651,7 +651,7 @@ Non-exhaustive list:
 
 3. **Structured Output Processing System**
 
-   - Develop parsers to extract structured data from unstructured user input (e.g., using Langgraph's Truecall and OpenAI's structured output to extract structured data to a given schema from raw input)
+   - Develop parsers to extract structured data from unstructured user input (e.g., using Langgraph's Trustcall and OpenAI's structured output to extract structured data to a given schema from raw input)
    - Implement entity recognition for customers, contacts, deals, etc.
    - Create decision logic for creating vs. updating entities
    - Build conflict resolution mechanisms for contradictory information
@@ -666,27 +666,18 @@ Non-exhaustive list:
    - Create foundational prompt templates for LLM interactions
    - Set up integration points with Slack, email, and web forms
 
-5. **Master Planning Agent (MVP)**
+5. **Supervisor Agent (MVP)**
 
    - Develop initial version with basic task planning capabilities
    - Implement core prompt structures that leverage company repository
    - Create feedback collection mechanisms
    - Design coordination workflows between specialized agents
 
-6. **Core UI Framework**
-   - Develop the basic UI architecture for the workspace
-   - Create key components for the account view
-   - Implement the tabbed interface system
-   - Build the initial navigation structure
-   - Create the adaptive layout engine
-
-### Phase 2: Agent Ecosystem
-
-7. **Essential Agent Development**
+6. **Essential Agent Development**
 
    - Prioritize high-value agents first:
      - email_agent
-     - customer_profile_agent
+     - crm_agent
      - content_creation_agent
      - create_pipeline agent
      - pricing-agent
@@ -697,6 +688,16 @@ Non-exhaustive list:
    - Build agent communication protocols
    - Implement basic error handling and logging
    - Create initial agent-specific UI components
+
+### Phase 2: Agent Ecosystem
+
+7. **Core UI Framework**
+
+   - Develop the basic UI architecture for the workspace
+   - Create key components for the account view
+   - Implement the tabbed interface system
+   - Build the initial navigation structure
+   - Create the adaptive layout engine
 
 8. **Event Management System**
 
@@ -1006,7 +1007,7 @@ Projects are organized in roadmap views that integrate:
 
 3. **Phased Implementation**
 
-   - Start with core data models and Master Planning Agent
+   - Start with core data models and Supervisor Agent
    - Implement customer state management as the first key feature
    - Build the Message Tree implementation next
    - Develop the account workspace UI with AI-suggested actions
@@ -1040,7 +1041,7 @@ Projects are organized in roadmap views that integrate:
 
 3. **Build a Minimal Viable Agent Framework**
 
-   - Implement the Master Planning Agent with LangGraph
+   - Implement the Supervisor Agent with LangGraph
    - Establish memory persistence patterns with LangChain
    - Build 2-3 critical specialized agents
    - Create the event system for inter-agent communication
@@ -1104,7 +1105,7 @@ Projects are organized in roadmap views that integrate:
    - Workspace state persistence
 
 4. **Agent Coordination Model**
-   - Master Planning Agent as the orchestrator
+   - Supervisor Agent as the orchestrator
    - Publish-subscribe pattern for event propagation
    - Request-response pattern for direct agent interactions
    - Asynchronous processing for long-running tasks
@@ -1141,7 +1142,7 @@ Projects are organized in roadmap views that integrate:
    - **Storage**: Supabase
    - **Structure**: Structured records of decisions and their outcomes
    - **Retrieval Pattern**: Direct lookup and pattern matching
-   - **Shared Across**: Master Planning Agent and specialized agents
+   - **Shared Across**: Supervisor agent and specialized agents
    - **Persistence**: Long-term with importance-based retention
 
 5. **Metrics Memory**
